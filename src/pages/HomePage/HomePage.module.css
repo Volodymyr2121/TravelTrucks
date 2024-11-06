@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    align-items: center;
+    background-image: url(../../../assets/bgr-home-page.jpg);
+    height: 100vh;
+    background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin: 0 auto;
+}
+
+.content{
+    margin-left: 64px;
+    display: block;
+    flex-direction: column;
+}
+
+.title{ 
+margin-bottom: 16px;
+font-weight: 600;
+font-size: 48px;
+line-height: 0.66;
+color: #F7F7F7;
+}
+
+.text{
+margin-bottom: 40px;
+font-weight: 600;
+font-size: 24px;
+line-height: 1.33;
+color: #F7F7F7;
+}
+
+
+@media screen and (min-device-pixel-ratio: 2),
+(min-resolution: 2dppx),
+(min-resolution: 192dpi){
+    .container{
+        background-image: url(../../../assets/bgr-home-page-2x.jpg);
+    }
+}

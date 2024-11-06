@@ -1,12 +1,17 @@
 import { NavLink } from "react-router-dom";
+import css from "./Navigation.module.css"
 
 
 const Navigation = () => {
     return (
-        <div>
-            <nav>
-                <NavLink to={"/"}>Home</NavLink>
-                <NavLink to={"/catalog"}>catalog</NavLink>
+        <div className={css.container}>
+            <nav className={css.navigationList}>
+                <NavLink className={({ isActive }) =>
+            isActive ? `${css.navigationItem} ${css.active}` : css.navigationItem}
+                    to={"/"}>Home</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive ? `${css.navigationItem} ${css.active}` : css.navigationItem}
+                    to={"/catalog"}>Catalog</NavLink>
             </nav>
       </div>  
     );

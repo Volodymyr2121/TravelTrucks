@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Loading from "./Loading/Loading";
-import Layout from "./Layout/Layout";
+import Loading from "../Loading/Loading";
+import Layout from "../Layout/Layout";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
-const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"))
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const NotFoundPage = lazy(() => import("../../pages/NotFoundPage/NotFoundPage"));
+const CatalogPage = lazy(() => import("../../pages/CatalogPage/CatalogPage"))
 
 const App = () => {
     return (

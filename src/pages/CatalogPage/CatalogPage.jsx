@@ -1,6 +1,13 @@
+import CampersList from "../../components/CampersList/CampersList";
+import SearchBox from "../../components/SearchBox/SearchBox";
+
+
 const CatalogPage = () => {
     return (
-        <h1>sfvf</h1>
+        <div>
+            <SearchBox />
+            <CampersList/>
+        </div>
     )
 };
 export default CatalogPage;
