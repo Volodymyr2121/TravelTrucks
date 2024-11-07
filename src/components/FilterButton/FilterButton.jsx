@@ -1,12 +1,13 @@
-
+import css from "./FilterButton.module.css"
 
 const FilterButton = ({ label, isActive, onClick, icon }) => {
     return (
         <button 
-      className={isActive ? "active" : ""} 
-      onClick={onClick}>
+      className={isActive ? css.buttonActiv : css.button} 
+      onClick={onClick}><span className={css.wrapper}>
       {icon} 
-      {label}
+          {label}
+          </span>
     </button>
     )
 };
