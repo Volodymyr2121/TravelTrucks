@@ -5,7 +5,7 @@ const FilterButton = ({ label, isActive, onClick, icon }) => {
         <button 
       className={isActive ? css.buttonActiv : css.button} 
       onClick={onClick}><span className={css.wrapper}>
-      {icon} 
+      <svg width={32} height={32}>{icon}</svg>
           {label}
           </span>
     </button>
