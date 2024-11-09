@@ -27,12 +27,10 @@ import { useEffect, useState } from "react";
     const handleFavoriteToggle = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     if (isFavorite) {
-      // Remove from favorites
       const updatedFavorites = favorites.filter(favId => favId !== id);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       setIsFavorite(false);
     } else {
-      // Add to favorites
       favorites.push(id);
       localStorage.setItem('favorites', JSON.stringify(favorites));
       setIsFavorite(true);
@@ -48,27 +46,28 @@ import { useEffect, useState } from "react";
     }))
     .concat(
       camper.transmission
-        ? [{ icon: <svg width={20} height={20}><use href={`${sprite}#icon-transmission`} /></svg>, label: camper.transmission }]
+        ? [{ icon: <svg width={20} height={20}><use href={`${sprite}#icon-transmission`} /></svg>, label: camper.transmission.charAt(0).toUpperCase() + camper.transmission.slice(1) }]
         : [],
       camper.engine
-        ? [{ icon: <svg width={20} height={20}><use href={`${sprite}#icon-engine`} /></svg>, label: camper.engine }]
+        ? [{ icon: <svg width={20} height={20}><use href={`${sprite}#icon-engine`} /></svg>, label: camper.engine.charAt(0).toUpperCase() + camper.engine.slice(1) }]
         : []
     );
 
     function reverseLocation(str) {
-  const [country, city] = str.split(',').map(part => part.trim()); // Split and trim spaces
+  const [country, city] = str.split(',').map(part => part.trim());
   return `${city}, ${country}`;
 }
 
     return (
-      <div className={css.card}>
+      <div className={css.conteiner}>
         <div className={css.imageWrapper}>
           <img src={gallery[0].thumb} alt={name} className={css.image} />
         </div>
         <div className={css.content}>
           <div className={css.header}>
             <h3 className={css.name}>{name}</h3>
-            <div className={css.price}>€{price.toFixed(2)}</div>
+            <div className={css.favoritedBlock}>
+            <p className={css.price}>€{price.toFixed(2)}</p>
             <svg
             className={`${css.favoriteIcon} ${isFavorite ? css.favorited : ''}`}
             width={24}
@@ -76,23 +75,27 @@ import { useEffect, useState } from "react";
             onClick={handleFavoriteToggle}
           >
             <use href={`${sprite}#icon-like`} />
-          </svg>
+              </svg>
+              </div>
           </div>
 
-          <div className={css.rating}>
-            <svg className={css.icon} width={16} height={16}>
+          <div className={css.ratingBlock}>
+            <div className={css.rating}>
+            <svg className={css.iconRating} width={16} height={16}>
               <use href={`${sprite}#icon-rating`} />
             </svg>
-            <p>{rating} ({reviews.length} Reviews)</p>
+            <p className={css.ratingText}>{rating}({reviews.length} Reviews)</p>
           </div>
 
           <div className={css.location}>
             <svg className={css.icon} width={16} height={16}>
               <use href={`${sprite}#icon-location`} />
             </svg>
-            <p>{reverseLocation(location)}</p>
-          </div>
+            <p className={css.locationText}>{reverseLocation(location)}</p>
+            </div>
+            </div>
 
+          
           <p className={css.description}>
             {description}
           </p>
@@ -108,7 +111,7 @@ import { useEffect, useState } from "react";
     ))}
   </div>
 
-          <button className='btn-red'>Show more</button>
+          <button style={{ width: "166px" }} className='btn-red'>Show more</button>
         </div>
       </div>
     );

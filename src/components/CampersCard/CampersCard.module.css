@@ -1,3 +1,94 @@
+.conteiner{
+    display: flex;
+    gap: 24px;   
+    max-width: 100%;
+    border: 1px solid #DADDE1;
+    border-radius: 20px;
+    padding: 24px;
+    /* height: 368px; */
+}
+
+.image{
+    display: block;
+    width: 292px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header{
+    display: flex;
+    margin-bottom: 8px;
+    /* justify-content: space-between; */
+}
+
+.name, .price{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #101828;
+}
+
+.favoritedBlock{
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}   
+
+.ratingBlock{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.rating{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.iconRating{
+    fill: #FFC531;
+}
+
+.ratingText, .locationText{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #101828;
+}
+
+.location{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.description{
+    max-width: 100%;
+    font-size: 16px;    
+    font-weight: 400;
+    line-height: 1.5;
+    color: #475467;
+    margin-bottom: 24px;
+}
+
+.features{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.feature{
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    background-color: #F2F4F7;
+    padding: 12px 18px;
+    border-radius: 100px;
+    height: 48px;
+}
+
 .favoriteIcon{
     fill: #101828;
 }

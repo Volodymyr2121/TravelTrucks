@@ -1,3 +1,6 @@
 .campersList{
-    max-width: 888px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: calc(100% - 360px - 64px);
 }
