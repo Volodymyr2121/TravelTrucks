@@ -1,4 +1,4 @@
-import sprite from "../../assets/icons/symbol-defs.svg";
+import sprite from "../../assets/icons/sprite-icon.svg";
 
 export const vehicleEquipmentFilters = [
         {

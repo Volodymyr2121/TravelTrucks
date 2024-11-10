@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCampers } from "./operations";
+import { fetchCampers,fetchCamperById} from "./operations";
 
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
     campers: [],
+    selectedCamper: null,
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    clearSelectedCamper: (state) => {
+      state.selectedCamper = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.pending, (state) => {
@@ -21,9 +26,23 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
+      })
+      .addCase(fetchCamperById.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedCamper = action.payload;
+      })
+      .addCase(fetchCamperById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
+
+export const { clearSelectedCamper } = campersSlice.actions;
 
 export default campersSlice.reducer;

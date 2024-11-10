@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
-import sprite from "../../../assets/icons/symbol-defs.svg"
+import sprite from "../../../assets/icons/sprite-icon.svg"
 import css from "./Location.module.css"
 
-const Location = () => {
+const Location = ({onLocationChange}) => {
      const formik = useFormik({
         initialValues: {
             location: "",
         },
         onSubmit: (values) => {
-            console.log("Location submitted:", values.location);
+            onLocationChange(values.location)
         },
     });
 

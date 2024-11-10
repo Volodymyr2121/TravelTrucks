@@ -1,7 +1,8 @@
   import { vehicleEquipmentFilters } from "../../constants/constants";
   import css from "./CampersCard.module.css";
-import sprite from '../../../assets/icons/symbol-defs.svg'
+import sprite from '../../../assets/icons/sprite-icon.svg'
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
   const CampersCard = ({ camper }) => {
     const {
@@ -110,8 +111,9 @@ import { useEffect, useState } from "react";
       </div>
     ))}
   </div>
-
-          <button style={{ width: "166px" }} className='btn-red'>Show more</button>
+<Link to={`/catalog/${camper.id}`}>
+            <button style={{ width: "166px" }} className='btn-red'>Show more</button>
+            </Link>
         </div>
       </div>
     );

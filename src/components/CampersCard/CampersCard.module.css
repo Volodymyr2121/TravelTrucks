@@ -70,6 +70,11 @@
     line-height: 1.5;
     color: #475467;
     margin-bottom: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 .features{

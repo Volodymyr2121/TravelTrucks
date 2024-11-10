@@ -2,12 +2,17 @@
   import css from "./SearchBox.module.css"
   import FilterList from "../FilterList/FilterList";
   import Location from "../Location/Location";
-  import sprite from "../../../assets/icons/symbol-defs.svg"
+  import sprite from "../../../assets/icons/sprite-icon.svg"
 import { vehicleEquipmentFilters } from "../../constants/constants";
+import { useDispatch } from "react-redux";
+import { fetchCampers } from "../../redux/Campers/operations";
 
 
   const SearchBox = () => {
-      const [selectedFilters, setSelectedFilters] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState([]);
+    const [location, setLocation] = useState("");
+    const [vehicleType, setVehicleType] = useState("");
+  const dispatch = useDispatch();
 
     const handleFilterSelect = (filterLabel) => {
       setSelectedFilters((prev) =>
@@ -16,6 +21,30 @@ import { vehicleEquipmentFilters } from "../../constants/constants";
           : [...prev, filterLabel]
       );
     };
+
+    const handleVehicleTypeSelect = (type) => {
+    setVehicleType(type);
+    };
+    
+    const handleLocationChange = (newLocation) => {
+    setLocation(newLocation);
+    };
+    
+    const handleSubmit = () => {const filters = {
+      kitchen: selectedFilters.includes("kitchen"),
+      AC: selectedFilters.includes("AC"),
+      bathroom: selectedFilters.includes("bathroom"),
+      TV: selectedFilters.includes("TV"),
+      radio: selectedFilters.includes("radio"),
+      refrigerator: selectedFilters.includes("refrigerator"),
+      microwave: selectedFilters.includes("microwave"),
+      gas: selectedFilters.includes("gas"),
+      water: selectedFilters.includes("water"),
+    };
+
+     
+    dispatch(fetchCampers({vehicleType, filters }));
+  };
 
     const vehicleTypeFilters = [
       { label: "Van", icon: <svg width={32} height={32}>
@@ -31,7 +60,7 @@ import { vehicleEquipmentFilters } from "../../constants/constants";
       
       return (
           <div className={css.container}>
-              <Location />
+              <Location onLocationChange={handleLocationChange}/>
               <div>
                   <h2 className={css.title}>Filters</h2>
         <FilterList
@@ -46,7 +75,7 @@ import { vehicleEquipmentFilters } from "../../constants/constants";
           selectedFilters={selectedFilters}
           onFilterSelect={handleFilterSelect} 
         />
-      <button style={{ width: "166px" }} className="btn-red">Search</button>
+      <button onClick={handleSubmit} style={{ width: "166px" }} className="btn-red">Search</button>
               </div>
           </div>
       )
