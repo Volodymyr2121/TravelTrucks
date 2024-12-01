@@ -13,11 +13,11 @@ const CampersList = () => {
   const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
-    dispatch(fetchCampers());
+    dispatch(fetchCampers({ vehicleType: "", filters: {} })); 
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchCampers());
+    dispatch(fetchCampers({ vehicleType: "", filters: campers.filters }));
   }, [dispatch, campers.filters]);
 
   if (isLoading) {
@@ -33,9 +33,11 @@ const CampersList = () => {
   };
 
   return (
-    <div className={css.campersList}>
+    <ul className={css.campersList}>
       {campers.slice(0, visibleCount).map((camper) => (
-        <CampersCard key={camper.id} camper={camper} />
+        <li key={camper.id}>
+          <CampersCard camper={camper} />
+        </li>
       ))}
 
       {visibleCount < campers.length && (
@@ -43,7 +45,7 @@ const CampersList = () => {
           Load more
         </button>
       )}
-    </div>
+    </ul>
   );
 };
 export default CampersList;

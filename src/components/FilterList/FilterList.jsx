@@ -3,7 +3,7 @@ import css from "./FilterList.module.css"
 
 
 const FilterList = ({ title, filters, onFilterSelect, selectedFilters }) => {
-  return(
+  return (
     <div className={css.container}>
       <h3 className={css.title}>{title}</h3>
       <div className={css.list}>
@@ -18,7 +18,7 @@ const FilterList = ({ title, filters, onFilterSelect, selectedFilters }) => {
         ))}
       </div>
     </div>
-    )
+  );
 };
 
 export default FilterList;

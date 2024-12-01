@@ -9,41 +9,47 @@ import { fetchCampers } from "../../redux/Campers/operations";
 
 
   const SearchBox = () => {
-    const [selectedFilters, setSelectedFilters] = useState([]);
+    const [selectedEquipmentFilters, setSelectedEquipmentFilters] = useState([]);
     const [location, setLocation] = useState("");
     const [vehicleType, setVehicleType] = useState("");
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleFilterSelect = (filterLabel) => {
-      setSelectedFilters((prev) =>
-        prev.includes(filterLabel)
-          ? prev.filter((f) => f !== filterLabel)
-          : [...prev, filterLabel]
-      );
-    };
+    setSelectedEquipmentFilters((prev) =>
+      prev.includes(filterLabel)
+        ? prev.filter((f) => f !== filterLabel)
+        : [...prev, filterLabel]
+    );
+  };
 
     const handleVehicleTypeSelect = (type) => {
-    setVehicleType(type);
-    };
+    setVehicleType((prevType) => (prevType === type ? "" : type));
+  };
     
     const handleLocationChange = (newLocation) => {
     setLocation(newLocation);
     };
     
-    const handleSubmit = () => {const filters = {
-      kitchen: selectedFilters.includes("kitchen"),
-      AC: selectedFilters.includes("AC"),
-      bathroom: selectedFilters.includes("bathroom"),
-      TV: selectedFilters.includes("TV"),
-      radio: selectedFilters.includes("radio"),
-      refrigerator: selectedFilters.includes("refrigerator"),
-      microwave: selectedFilters.includes("microwave"),
-      gas: selectedFilters.includes("gas"),
-      water: selectedFilters.includes("water"),
+     const handleSubmit = () => {
+    const noLowercaseFilters = ["AC", "TV"];
+
+    const filters = vehicleEquipmentFilters.reduce((acc, filter) => {
+      if (selectedEquipmentFilters.includes(filter.label)) {
+        const key = noLowercaseFilters.includes(filter.label) ? filter.label : filter.label.toLowerCase();
+        acc[key] = true;
+      }
+      return acc;
+    }, {});
+       
+       const vehicleTypeMapping = {
+      Van: "panelTruck",
+      "Fully Integrated": "fullyIntegrated",
+      Alcove: "alcove",
     };
 
-     
-    dispatch(fetchCampers({vehicleType, filters }));
+    const mappedVehicleType = vehicleTypeMapping[vehicleType] || vehicleType;
+
+    dispatch(fetchCampers({ vehicleType: mappedVehicleType, filters }));
   };
 
     const vehicleTypeFilters = [
@@ -64,16 +70,16 @@ import { fetchCampers } from "../../redux/Campers/operations";
               <div>
                   <h2 className={css.title}>Filters</h2>
         <FilterList
-          title="Vehicle equipment" 
-          filters={vehicleEquipmentFilters} 
-          selectedFilters={selectedFilters}
-          onFilterSelect={handleFilterSelect} 
+          title="Vehicle equipment"
+          filters={vehicleEquipmentFilters}
+          selectedFilters={selectedEquipmentFilters}
+          onFilterSelect={handleFilterSelect}
         />
         <FilterList 
           title="Vehicle type" 
           filters={vehicleTypeFilters} 
-          selectedFilters={selectedFilters}
-          onFilterSelect={handleFilterSelect} 
+          selectedFilters={[vehicleType]}
+          onFilterSelect={handleVehicleTypeSelect} 
         />
       <button onClick={handleSubmit} style={{ width: "166px" }} className="btn-red">Search</button>
               </div>

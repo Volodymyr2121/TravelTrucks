@@ -3,7 +3,7 @@ import sprite from "../../assets/icons/sprite-icon.svg";
 export const vehicleEquipmentFilters = [
         {
             label: "AC",
-            icon: <use href={`${sprite}#icon-ac`} />},
+            icon: <use href={`${sprite}#icon-AC`} />},
       { label: "Kitchen", icon: 
           <use href={`${sprite}#icon-Kitchen`} />
 },

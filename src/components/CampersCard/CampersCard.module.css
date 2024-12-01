@@ -5,7 +5,6 @@
     border: 1px solid #DADDE1;
     border-radius: 20px;
     padding: 24px;
-    /* height: 368px; */
 }
 
 .image{
@@ -18,7 +17,6 @@
 .header{
     display: flex;
     margin-bottom: 8px;
-    /* justify-content: space-between; */
 }
 
 .name, .price{
@@ -100,4 +98,8 @@
 
 .favorited{
     fill: #E44848;
+}
+
+.iconWrapper{
+margin-right: 8px;
 }

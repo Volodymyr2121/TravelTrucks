@@ -14,9 +14,11 @@ import { Link } from "react-router-dom";
       gallery,
       reviews,
       description,
+      form,
     } = camper;
 
     const [isFavorite, setIsFavorite] = useState(false);
+    const acAndTvFilters = ["AC", "TV"];
     
      useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -40,7 +42,7 @@ import { Link } from "react-router-dom";
 
 
     const camperFeatures = vehicleEquipmentFilters
-    .filter((filter) => camper[filter.label.toLowerCase()] !== undefined ? camper[filter.label.toLowerCase()] : false)
+    .filter((filter) => camper[filter.label.toLowerCase()] === true) // Перевірка на true
     .map((filter) => ({
       icon: filter.icon,
       label: filter.label,
@@ -53,6 +55,40 @@ import { Link } from "react-router-dom";
         ? [{ icon: <svg width={20} height={20}><use href={`${sprite}#icon-engine`} /></svg>, label: camper.engine.charAt(0).toUpperCase() + camper.engine.slice(1) }]
         : []
     );
+
+  if (form) {
+    let formattedVehicleType = form;
+
+    if (formattedVehicleType === 'panelTruck') {
+      formattedVehicleType = 'Van';
+    } else if (formattedVehicleType === 'fullyIntegrated') {
+      formattedVehicleType = 'Fully Integrated';
+    } else if (formattedVehicleType === 'alcove') {
+      formattedVehicleType = 'Alcove';
+    }
+
+  acAndTvFilters.forEach((item) => {
+    if (camper[item] === true) {
+      camperFeatures.push({
+        icon: (
+          <svg width={20} height={20}>
+            <use href={`${sprite}#icon-${item}`} />
+          </svg>
+        ),
+        label: item,
+      });
+    }
+  });
+    
+    camperFeatures.push({
+      icon: (
+        <svg width={20} height={20}>
+          <use href={`${sprite}#icon-${formattedVehicleType === 'Fully Integrated' ? 'Integrated' : formattedVehicleType}`} />
+        </svg>
+      ), 
+      label: formattedVehicleType.charAt(0).toUpperCase() + formattedVehicleType.slice(1),
+    });
+    }
 
     function reverseLocation(str) {
   const [country, city] = str.split(',').map(part => part.trim());

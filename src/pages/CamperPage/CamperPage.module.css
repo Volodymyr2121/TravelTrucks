@@ -98,7 +98,11 @@ margin-bottom: 44px;
     color: #101828;
 }
 
-.active {
+.navigationItem{
+    text-decoration: none;
+}
+
+.navigationItem.active {
     border-bottom: 1px solid #D84343;
 }
 

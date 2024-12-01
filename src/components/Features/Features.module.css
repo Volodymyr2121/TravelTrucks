@@ -22,6 +22,10 @@
     justify-content: center;
 }
 
+.icon{
+    margin-right: 8px;
+}
+
 .features{
     margin-bottom: 100px;
 }
