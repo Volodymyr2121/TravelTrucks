@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { fetchCamperById } from "../../redux/Campers/operations";
 import css from "./CamperPage.module.css";
 import sprite from "../../../assets/icons/sprite-icon.svg";
@@ -11,11 +11,6 @@ const CamperPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { selectedCamper, isLoading, error } = useSelector((state) => state.campers);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("features", { replace: true });
-  }, [navigate, id]);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));

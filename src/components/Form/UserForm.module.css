@@ -1,9 +1,9 @@
 .formContainer {
-    max-width: 641px;
+    max-width: 100%;
     padding: 44px 57px;
     border: 1px solid #DADDE1;
     border-radius: 10px;
-    height: 588px;
+    height: 500px;
 }
 
 .heading {
@@ -23,17 +23,19 @@
 }
 
 .formField {
+    width: 100%;
     margin-bottom: 14px;
 }
 
 input, textarea{
+    width: 100%;    
     all:unset
 }
 
 .formField input,
 .formField textarea {
     text-decoration: none;
-    width: 527px;
+    width: 464px;
     padding: 18px;
     border: 1px solid #F7F7F7;
     border-radius: 12px;
@@ -65,3 +67,4 @@ input, textarea{
     flex-direction: column;
     align-items: center;
 }
+

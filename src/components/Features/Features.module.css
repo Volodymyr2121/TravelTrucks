@@ -3,7 +3,7 @@
     padding: 44px 52px;
     border-radius: 10px;
     background-color: #F7F7F7;
-    height: 538px;
+    max-height: 588px;
 }
 
 .list{

@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import DatePicker from 'react-datepicker';
 import * as Yup from 'yup';
-import css from './UserForm.module.css'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
+import css from './UserForm.module.css';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Required'),
@@ -10,10 +15,15 @@ const validationSchema = Yup.object({
 });
 
 const UserForm = () => {
-    return (
+  const [bookingDate, setBookingDate] = useState(null);
+
+  return (
     <div className={css.formContainer}>
       <h2 className={css.heading}>Book your campervan now</h2>
       <p className={css.subText}>Stay connected! We are always ready to help you.</p>
+
+      <ToastContainer />
+
       <Formik
         initialValues={{
           name: '',
@@ -22,36 +32,48 @@ const UserForm = () => {
           comment: '',
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             console.log(JSON.stringify(values, null, 2));
+
+            resetForm();
+            setBookingDate(null);
+
+            toast.success('Booking successful!');
+
             setSubmitting(false);
           }, 400);
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form className={css.form}>
             <div className={css.formField}>
-              <label className={css.label} htmlFor="name">
-              <Field type="text" name="name" placeholder="Name*" /></label>
+              <Field type="text" name="name" placeholder="Name*" />
               <ErrorMessage name="name" component="div" className={css.errorMessage} />
             </div>
 
             <div className={css.formField}>
-              <label htmlFor="email">
-              <Field type="email" name="email" placeholder="Email*" /></label>
+              <Field type="email" name="email" placeholder="Email*" />
               <ErrorMessage name="email" component="div" className={css.errorMessage} />
             </div>
 
             <div className={css.formField}>
-              <label htmlFor="bookingDate">
-              <Field type="date" name="bookingDate" placeholder="BookingDate*"/></label>
+              <DatePicker
+                selected={bookingDate}
+                onChange={(date) => {
+                  setBookingDate(date);
+                  setFieldValue('bookingDate', date);
+                }}
+                dateFormat="yyyy/MM/dd"
+                className={css.customInput}
+                calendarClassName={css.customCalendar}
+                placeholderText="Select a booking date"
+              />
               <ErrorMessage name="bookingDate" component="div" className={css.errorMessage} />
             </div>
 
             <div className={css.formField}>
-              <label htmlFor="comment">
-              <Field as="textarea" name="comment" placeholder="Comment" /></label>
+              <Field as="textarea" name="comment" placeholder="Comment" />
             </div>
 
             <button type="submit" disabled={isSubmitting} className={css.submitButton}>
@@ -65,3 +87,4 @@ const UserForm = () => {
 };
 
 export default UserForm;
+
