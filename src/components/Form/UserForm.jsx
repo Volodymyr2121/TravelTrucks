@@ -67,7 +67,7 @@ const UserForm = () => {
                 dateFormat="yyyy/MM/dd"
                 className={css.customInput}
                 calendarClassName={css.customCalendar}
-                placeholderText="Select a booking date"
+                placeholderText="Booking date*"
               />
               <ErrorMessage name="bookingDate" component="div" className={css.errorMessage} />
             </div>
