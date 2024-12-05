@@ -33,10 +33,10 @@ To get started with the project locally, follow the steps below:
 
 1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/Volodymyr2121/TravelTrucks.git
-   cd traveltrucks
-   ```
+```bash
+ git clone https://github.com/Volodymyr2121/TravelTrucks.git
+ cd TravelTrucks
+ ```
 
 2. **Install dependencies**:
 
@@ -47,7 +47,7 @@ To get started with the project locally, follow the steps below:
 3. **Run the app**:
 
 ```bash
-npm start
+ npm start
 ```
 
 ## Contributing
