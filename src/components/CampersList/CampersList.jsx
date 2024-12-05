@@ -3,13 +3,13 @@ import { fetchCampers } from "../../redux/Campers/operations";
 import CampersCard from "../CampersCard/CampersCard";
 import css from "./CampersList.module.css";
 import { useEffect, useState } from "react";
-import { selectCampers } from "../../redux/Campers/selectors";
+import { selectCampers,selectError, isLoading, } from "../../redux/Campers/selectors";
 
 const CampersList = () => {
   const dispatch = useDispatch();
   const campers = useSelector(selectCampers);
-  const isLoading = useSelector((state) => state.campers.isLoading);
-  const error = useSelector((state) => state.campers.error);
+  const Loading = useSelector(isLoading);
+  const Error = useSelector(selectError);
   const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
@@ -20,12 +20,16 @@ const CampersList = () => {
     dispatch(fetchCampers({ vehicleType: "", filters: campers.filters }));
   }, [dispatch, campers.filters]);
 
-  if (isLoading) {
+  if (Loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (Error) {
+    return <div>Error: {Error}</div>;
+  }
+
+  if (!Loading && campers.length === 0) {
+    return <div>No campers found for the given criteria.</div>; // Повідомлення про відсутність результатів
   }
 
   const handleLoadMore = () => {

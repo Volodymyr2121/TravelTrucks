@@ -49,7 +49,7 @@ import { fetchCampers } from "../../redux/Campers/operations";
 
     const mappedVehicleType = vehicleTypeMapping[vehicleType] || vehicleType;
 
-    dispatch(fetchCampers({ vehicleType: mappedVehicleType, filters }));
+    dispatch(fetchCampers({ vehicleType: mappedVehicleType, filters, location }));
   };
 
     const vehicleTypeFilters = [

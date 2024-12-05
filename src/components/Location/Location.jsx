@@ -10,7 +10,13 @@ const Location = ({onLocationChange}) => {
         onSubmit: (values) => {
             onLocationChange(values.location)
         },
-    });
+     });
+    
+    const handleLocationChange = (e) => {
+    const newLocation = e.target.value;
+    formik.handleChange(e);
+    onLocationChange(newLocation);
+  };
 
     return (
         <div className={css.locationWrapper}>
@@ -29,7 +35,7 @@ const Location = ({onLocationChange}) => {
                         placeholder="Enter a city"
                         className={css.locationInput}
                         value={formik.values.location}
-                        onChange={formik.handleChange}
+                        onChange={handleLocationChange}
                     />
                 </div>
             </form>
